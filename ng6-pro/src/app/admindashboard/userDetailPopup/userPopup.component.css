@@ -1,0 +1,96 @@
+.userpopup_main mat-dialog-content {
+    width: 800px;
+    max-height: 80vh;
+    padding: 0px 30px;
+}
+
+.userpop-header h1 {
+    font-size: 30px;
+    color: #3c474b;
+}
+
+.userpop-header .form-label label {
+    width: 120px;
+    margin-top: 10px;
+    color: #99a3a6;
+    font-size: 13px;
+}
+
+.userpop-header button {
+    margin-top: -10px;
+}
+
+.userpop-header .btn_black {
+    padding: 0 20px !important;
+    margin-left: 6px;
+}
+
+.userpop-header .form-label {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.userpopup_main .userpop-btnwrap {
+    margin-right: 20px;
+}
+
+
+/* custom-popup-box */
+
+.custom-popup-box {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    left: 0;
+    top: 0;
+}
+
+.custom-popup-box .custom-popup-wrapper {
+    background: #fff;
+    padding: 20px;
+    width: 400px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.custom-popup-box .custom-popup-wrapper textarea {
+    resize: none;
+    min-height: 115px;
+}
+
+.userpopup_main .form_wrap_content {
+    padding: 10px 0px;
+}
+
+.userpopup_main .input-form .input-icon-right,
+.userpopup_main .input-form .input-icon-rightinfo {
+    display: none;
+}
+
+.userpopup_main .input-form.error-input .input-icon-right,
+.userpopup_main .input-form.error-input .input-icon-rightinfo {
+    display: block;
+}
+
+.custom-popup-box .mat-dialog-actions {
+    margin-bottom: 0 !important;
+}
+
+.has-error {
+    color: #ff0000;
+}
+
+.custom-label {
+    color: #99a3a6;
+    font-size: 14px;
+}
+
+.approval-template {}
+
+.approval-template h1 {
+    font-size: 22px !important;
+}

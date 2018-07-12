@@ -1,0 +1,5 @@
+.dashboard-wrapper {}
+
+.dashboard-wrapper .nav a {
+    cursor: pointer;
+}

@@ -1,0 +1,102 @@
+<section class="admin-dashboard-wrapper">
+    <div class="container">
+        <!-- <div class="alert alert-success">
+          Welcome <strong>Admin</strong>
+      </div> -->
+    </div>
+    <div class="entry-group inputbox-icon">
+        <h1 class="heading">T M Management</h1>
+        <div class="input-form d-flex align-items-center searchwrapper">
+            <mat-form-field>
+                <div class="input-icon">
+                    <span class="ico-search">
+                      <svg> 
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#searchIco"></use>
+                      </svg>
+                  </span>
+                </div>
+                <input matInput name="username" class="searchbox" placeholder="Search here..." type="search" autocomplete="off" [(ngModel)]="searchText" (keyup)="searchFilter(searchText)">
+            </mat-form-field>
+
+            <button class="btn_black filter-iconbtn" mat-button (click)="filterToggle()" *ngIf="!isFilterAction"> 
+              <span class="ico-filter">
+                  <svg> 
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#filterIco"></use>
+                  </svg>
+              </span> Filter
+          </button>
+            <button class="btn_black filter-iconbtn" mat-button (click)="resetFilter()" *ngIf="isFilterAction">
+              <span class="ico-filter">
+                  <svg> 
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#filterIco"></use>
+                  </svg>
+              </span> 
+              Reset Filter
+          </button>
+        </div>
+    </div>
+    <div class="dashboard-innerwrap">
+        <div class="table-responsive" *ngIf="!isLoading">
+            <table class="table table-fixed">
+                <thead>
+                    <tr>
+                        <th *ngFor="let colHead of displayedColumns" [hidden]="!colHead.isShow">{{colHead.label}}</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of dataSource">
+                        <td *ngFor="let colHead of displayedColumns" [hidden]="!colHead.isShow">
+                            {{row[colHead.key] || '--'}}
+                        </td>
+                        <td>
+                            <div class="grid-action">
+                                <a><i class="material-icons">remove_red_eye</i></a>
+                                <a><i class="material-icons">edit</i></a>
+                                <a><i class="material-icons">delete</i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="no-rec-msg" *ngIf="dataSource.length=='0'">No records found</p>
+        </div>
+        <mat-spinner class="loader" *ngIf="isLoading"></mat-spinner>
+        <div id="filter-wrapper-sec" *ngIf="isFilter" [@slideInOut]>
+            <div class="filter-inner-sec">
+                <form #filterFrom="ngForm" class="d-flex align-items-center justify-content-center">
+                    <div class="form-label">
+                        <label>Country:</label>
+                        <mat-form-field class="select-item">
+                            <mat-select name="CountryId" [(ngModel)]="filterData.CountryId" required>
+                                <mat-option *ngFor="let country of countryList" [value]="country.CountryID">
+                                    {{ country.CountryName }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-label">
+                        <label>From Date:</label>
+                        <mat-form-field color="accent">
+                            <input matInput [matDatepicker]="picker1" name="FromDate" [(ngModel)]="filterData.FromDate" readonly required>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-label">
+                        <label>To Date:</label>
+                        <mat-form-field color="accent">
+                            <input matInput [matDatepicker]="picker2" name="ToDate" [(ngModel)]="filterData.ToDate" readonly required>
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </form>
+                <div class="d-flex align-items-center justify-content-center button-wrap">
+                    <button class="btn_grey" mat-button (click)="resetFilter()">Cancel</button>
+                    <button class="btn_primary" mat-button [disabled]="!filterFrom.form.valid" (click)="onFilter(filterData)">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

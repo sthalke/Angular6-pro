@@ -1,0 +1,76 @@
+<header>
+    <nav class="navbar navhead navbar-expand-lg fixed-top navbar-default">
+        <button class="navbar-toggler" type="button" (click)="responsiveToggle()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand logo" (click)="navigation('home')">
+            <img src="assets/images/logo.png">
+        </a>
+        <div class="collapse navbar-collapse">
+            <!-- TM NAVIGATION START-->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar-listing" *ngIf="rollId==1">
+                <!-- <li class="nav-item" routerLink="accident" routerLinkActive="active">
+                    <a class="nav-link">Accident</a>
+                </li> -->
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/tm/accident.html" class="nav-link">Accident</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/tm/areport.html" class="nav-link">Accident Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/tm/reports.html" class="nav-link">Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/tm/analytics.html" class="nav-link">Analytics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/tm/setup.html" class="nav-link">Setup</a>
+                </li>
+            </ul>
+            <!-- TM NAVIGATION END-->
+
+            <!-- ADMIN NAVIGATION START-->
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar-listing" *ngIf="rollId==2">
+                <li class="nav-item" routerLink="admin/dashboard" routerLinkActive="active">
+                    <a class="nav-link">T M Review</a>
+                </li>
+                <li class="nav-item" routerLink="admin/tm-management" routerLinkActive="active">
+                    <a class="nav-link">T M Management</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/admin/reports.html" class="nav-link">Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/admin/analytics.html" class="nav-link">Analytics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://jadapp.oceanmanager.com/pages/admin/setup.html" class="nav-link">Setup</a>
+                </li>
+            </ul>
+            <!-- ADMIN NAVIGATION START-->
+            <ul class="navbar-nav user-dropdown">
+                <!-- USER PROFILE DROPDOWN -->
+                <li class="login-time"><span>Last Log In: </span> {{lastLogin}}</li>
+                <li class="log-usericon">
+                    <span class="ico-userbg">
+                      <svg> 
+                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#userbgIco"></use>
+                      </svg>
+                   </span>
+                </li>
+                <li class="nav-item dropdown" appDropdown>
+                    <a class="nav-link dropdown-toggle profile-name">
+                        {{fullName}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" *ngIf="rollId==1" (click)="navigation('change-password')">Change Password</a>
+                        <a class="dropdown-item" *ngIf="rollId==2" (click)="navigation('admin/change-password')">Change Password</a>
+                        <a class="dropdown-item" (click)="logout()">Log Off</a>
+                        <!-- <div class="dropdown-divider"></div> -->
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

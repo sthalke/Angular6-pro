@@ -1,0 +1,54 @@
+@media only screen and (max-width: 1120px) {
+    #signin {
+        background-color: #02b0ed;
+        border-radius: 300px 0px 0px 300px;
+        height: 550px;
+        padding-top: 100px;
+        background-image: url('/assets/images/anchor.png');
+        background-size: 40% 40%;
+        width: 100%;
+        float: right;
+        background-position: right;
+        background-repeat: no-repeat;
+    }
+    .bg-img-lock {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    form.form-signin {
+        padding-left: 3em;
+        width: 100%;
+        float: left;
+        margin-top: 50px;
+    }
+    .login_text_wrap {
+        width: 100%;
+        float: none;
+        margin-top: 0;
+    }
+    .logo img {
+        width: 180px;
+    }
+    .login_header_wrapper {
+        margin-top: 8px;
+    }
+    .registration_tabs_text ul {
+        justify-content: flex-start !important;
+        flex-wrap: wrap !important;
+    }
+    .registration_tabs_text ul li {
+        margin: 10px;
+        flex: 1 1 40%;
+    }
+    .newsletter.foot_content {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .registration_tabs_text ul li {
+        flex: 1 1 100%;
+    }
+}

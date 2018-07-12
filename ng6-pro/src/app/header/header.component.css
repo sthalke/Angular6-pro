@@ -1,0 +1,91 @@
+header {
+    min-height: 76px;
+    margin-bottom: 30px;
+}
+
+.navbar-toggler-icon {
+    cursor: pointer;
+    background: #333;
+}
+
+.user-dropdown .dropdown-menu {
+    border: unset;
+    box-shadow: 0 2px 4px #ddd;
+    margin-top: 12px;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.navhead {
+    box-shadow: 0 2px 4px #ddd;
+    background: #ffffff;
+    padding: 2px 0px;
+    z-index: 99;
+}
+
+.navbar-listing .nav-item {
+    font-weight: 600;
+    color: #3c474b;
+    font-size: 14px;
+    position: relative;
+    padding: 0px 10px;
+    letter-spacing: 1.2px;
+}
+
+.navbar-listing .nav-item.active,
+.navbar-listing .nav-item:hover {
+    color: #02b0ed;
+}
+
+.navbar-listing .nav-item.active .nav-link::after,
+.navbar-listing .nav-item:hover .nav-link::after {
+    content: "";
+    border-bottom: 3px solid #02b0ed;
+    height: 2px;
+    width: 60px;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -22px;
+    right: 0;
+    margin: auto;
+}
+
+.login-time span {
+    color: #99a3a6;
+    padding-right: 5px;
+}
+
+.login-time {
+    color: #3c474b;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-right: 20px;
+    border-right: 1px solid #ccc;
+    height: 45px;
+}
+
+.log-usericon {
+    padding-left: 15px;
+}
+
+.navbar-nav.user-dropdown {
+    margin-top: 10px;
+}
+
+.user-dropdown .nav-link {
+    padding-right: 20px;
+}
+
+.navbar-brand.logo {
+    padding-left: 20px;
+}
+
+.admin-dashboard-wrapper .table td {
+    color: #3c474b;
+}
+
+.profile-name {
+    text-transform: capitalize;
+}

@@ -1,0 +1,252 @@
+<nav class="navbar navbar-expand-sm" *ngIf="!isNavShow">
+    <div class="container">
+        <div class="login_header_wrapper mar-t-0">
+            <div class="logo">
+                <a href="https://jadwp.oceanmanager.com"><img src="assets/images/logo.png"></a>
+            </div>
+        </div>
+        <div class="acc_login_wrap float-right">
+            <ul class="nav navbar-nav list-inline">
+                <li class="acc_log_text"><span>Have an account? </span><a (click)="navigate()">Log In</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section id="registration_wrapper">
+    <div class="registration_form_wrap inputshad_none" *ngIf="!isResgister">
+        <h1 class="reg_form_head text-center">Technical Manager Registration</h1>
+        <form class="applicant-form" #appForm="ngForm">
+            <div class="applicant_details_wrap form_wrap_content">
+                <div class="registration_tabs_text">
+                    <p><span>APPLICANT DETAILS</span></p>
+                </div>
+                <div class="row">
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Company Name" type="text" name="compName" [(ngModel)]="appData.CompanyName" appNoSpaces required autocomplete="off" maxlength="100" #companyName="ngModel">
+                            <mat-error *ngIf="companyName.hasError('required') || companyName.invalid">
+                                {{errorMsg.COMPANY_NAME_REQUIRED}}
+                            </mat-error>
+                            <!-- <mat-error *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)">
+                                {{errorMsg.COMPANY_NAME_REQUIRED}}
+                            </mat-error> -->
+                        </mat-form-field>
+                    </div>
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Company ID" type="text" name="companyId" [(ngModel)]="appData.CompanyID" required autocomplete="off" maxlength="50" #companyId="ngModel" appNoSpaces>
+                            <mat-error *ngIf="companyId.hasError('required') || companyId.invalid">
+                                {{errorMsg.COMPANY_ID_REQUIRED}}
+                            </mat-error>
+                            <!-- <mat-error *ngIf="companyId.invalid && (companyId.dirty || companyId.touched)">
+                                {{errorMsg.COMPANY_ID_REQUIRED}}
+                            </mat-error> -->
+                            <div class="input-icon-rgt">
+                                <span class="ico-question icon-szwrap" matTooltip="Please enter your registered Company ID" [matTooltipPosition]="tooltipPosition[0]">
+                                    <svg> 
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#questionIco"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="First Name" type="text" name="FirstName" [(ngModel)]="appData.FirstName" required autocomplete="off" maxlength="70" #fName="ngModel" appNoSpaces>
+                            <mat-error *ngIf="fName.hasError('required') || fName.invalid">
+                                {{errorMsg.FIRST_NAME_REQUIRED}}
+                            </mat-error>
+                            <!-- <mat-error *ngIf="fName.invalid && (fName.dirty || fName.touched)">
+                                {{errorMsg.FIRST_NAME_REQUIRED}}
+                            </mat-error> -->
+                        </mat-form-field>
+                    </div>
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Last Name" type="text" name="LastName" [(ngModel)]="appData.LastName" required autocomplete="off" maxlength="70" #lName="ngModel" appNoSpaces>
+                            <!-- <mat-error *ngIf="lName.hasError('required')">
+                                {{errorMsg.LAST_NAME_REQUIRED}}
+                            </mat-error> -->
+                            <mat-error *ngIf="lName.invalid || lName.hasError('required')">
+                                {{errorMsg.LAST_NAME_REQUIRED}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-form plr15 col-md-6">
+                        <div *ngFor="let Email of appData.Emails; let i=index">
+                            <mat-form-field>
+                                <input matInput placeholder="Contact Email" type="text" name="email{{i}}" [(ngModel)]="appData.Emails[i].Email" required autocomplete="off" #emailValidate="ngModel" [pattern]="emailPattern">
+                                <mat-error *ngIf="emailValidate.hasError('pattern')">
+                                    {{errorMsg.VALID_EMAIL}}
+                                </mat-error>
+                                <mat-error *ngIf="emailValidate.hasError('required')">
+                                    {{errorMsg.EMAIL_REQUIRED}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div class="add-remove">
+                                <!-- <a class="add-more">Add more email</a> -->
+                                <a class="add-more" *ngIf="i==0" (click)="addEmails()">Add more email</a>
+                                <a class="add-more" *ngIf="i>0" (click)="removeEmail(i)">Remove email</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Contact Telephone" type="text" name="ContactNo" [(ngModel)]="appData.ContactNo" required maxlength="18" #contactNo="ngModel" appNoSpaces>
+                            <!-- <mat-error *ngIf="contactNo.hasError('required')">
+                                {{errorMsg.CONTACT_NO_REQUIRED}}
+                            </mat-error> -->
+                            <mat-error *ngIf="contactNo.invalid || contactNo.hasError('required')">
+                                {{errorMsg.CONTACT_NO_REQUIRED}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact_details_wrap form_wrap_content">
+                <div class="registration_tabs_text">
+                    <p><span>Address details</span></p>
+                </div>
+                <div class="row">
+                    <div class="input-form plr15 col-md-12">
+                        <mat-form-field>
+                            <input matInput placeholder="Address Line 1" type="text" name="Address1" [(ngModel)]="appData.Address1" maxlength="100" required #address="ngModel" appNoSpaces>
+                            <!-- <mat-error *ngIf="address.hasError('required')">
+                                {{errorMsg.ADDRESS1_REQUIRED}}
+                            </mat-error> -->
+                            <mat-error *ngIf="address.invalid || address.hasError('required')">
+                                {{errorMsg.ADDRESS1_REQUIRED}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-form plr15 col-md-12">
+                        <mat-form-field>
+                            <input matInput placeholder="Address Line 2" type="text" name="Address2" [(ngModel)]="appData.Address2" maxlength="100">
+                        </mat-form-field>
+
+                    </div>
+                    <div class="input-form plr15 col-md-12">
+                        <mat-form-field>
+                            <input matInput placeholder="Address Line 3" type="text" name="Address3" [(ngModel)]="appData.Address3" maxlength="100">
+                        </mat-form-field>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-form plr15 col-md-4">
+                        <mat-form-field>
+                            <input matInput placeholder="City" type="text" name="City" [(ngModel)]="appData.City" required maxlength="60" #city="ngModel" appNoSpaces>
+                            <!-- <mat-error *ngIf="city.hasError('required')">
+                                {{errorMsg.CITY_REQUIRED}}
+                            </mat-error> -->
+                            <mat-error *ngIf="city.invalid || city.hasError('required')">
+                                {{errorMsg.CITY_REQUIRED}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-form plr15 col-md-4">
+                        <mat-form-field>
+                            <input matInput placeholder="County/State" type="text" name="State" [(ngModel)]="appData.State" required maxlength="50" #state="ngModel" appNoSpaces>
+                            <!-- <mat-error *ngIf="city.hasError('required')">
+                                {{errorMsg.STATE_REQUIRED}}
+                            </mat-error> -->
+                            <mat-error *ngIf="state.invalid || city.hasError('required')">
+                                {{errorMsg.STATE_REQUIRED}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-form plr15 col-md-4">
+                        <mat-form-field>
+                            <input matInput placeholder="Postal/Zip Code" type="text" name="PostalCode" [(ngModel)]="appData.PostalCode" xrequired maxlength="10" #postalCode="ngModel">
+                            <!-- <mat-error *ngIf="postalCode.hasError('required')">
+                                {{errorMsg.POSTAL_CODE_REQUIRED}}
+                            </mat-error> -->
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Country" name="CountryId" [(ngModel)]="appData.CountryId" required #countryId="ngModel">
+                                <mat-option *ngFor="let country of countryList" [value]="country.CountryID">
+                                    {{ country.CountryName }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="countryId.hasError('required')">
+                                {{errorMsg.COUNTRY_REQUIRED}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Timezone" name="Timezone" [(ngModel)]="appData.Timezone" required>
+                                <mat-option *ngFor="let timezone of timezoneList" [value]="timezone.DisplayName">
+                                    {{ timezone.DisplayName }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div> -->
+                </div>
+            </div>
+            <div class="vessel_details_wrap form_wrap_content">
+                <div class="registration_tabs_text">
+                    <p><span>VESSEL details</span></p>
+                </div>
+                <div class="text-center vessel_sub_heading">
+                    <p>(Please note that vessel details are for validation purposes only and will not be shared) </p>
+                </div>
+                <div class="row" *ngFor="let vessel of appData.Vessels; let i=index">
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="Vessel Name" type="text" name="Vessel{{i}}" [(ngModel)]="appData.Vessels[i].VesselName" required maxlength="30" #vessel="ngModel" appNoSpaces>
+                            <!-- <mat-error *ngIf="vessel.hasError('required')">
+                                {{errorMsg.VESSELS_REQUIRED}}
+                            </mat-error> -->
+                            <mat-error *ngIf="vessel.invalid || vessel.hasError('required')">
+                                {{errorMsg.VESSELS_REQUIRED}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-form plr15 col-md-6">
+                        <mat-form-field>
+                            <input matInput placeholder="IMO Number" type="text" name="IMONumber{{i}}" [(ngModel)]="appData.Vessels[i].IMONumber" required minlength="7" maxlength="7" OnlyNumber="true" #imoNo="ngModel">
+                            <mat-error *ngIf="imoNo.hasError('required')">
+                                {{errorMsg.IMO_REQUIRED}}
+                            </mat-error>
+                            <mat-error *ngIf="imoNo.hasError('minlength')">
+                                IMO Number must be at least 7 number.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-md-12 add-remove">
+                        <a class="add-more" *ngIf="i==0" (click)="addVessels()">Add more vessels</a>
+                        <a class="add-more" *ngIf="i>0" (click)="removeVessels(i)">Remove vessels</a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="text-center regfoot_box">
+                <div class="robotcheck_wrap">
+                    <ngx-recaptcha2 #captchaElem (success)="handleCaptchaSuccess($event)" [size]="size" [hl]="lang" [theme]="theme" [type]="type" (expire)="handleCaptchaExpire()"></ngx-recaptcha2>
+                </div>
+                <div class="ckbox-wrap">
+                    <mat-checkbox name="termsCondition" type="checkbox" [(ngModel)]="appData.tandc" required>
+                        Agree To
+                    </mat-checkbox>
+                    <a (click)="openDialog()">Terms and Conditions</a>
+                </div>
+                <div class="register_btn">
+                    <!-- <button type="button" mat-button class="btn btn_primary" [ngClass]="{'disabled': isDisabled}" [disabled]="!appForm.form.valid" (click)="onSubmit(appData)">Register</button> -->
+                    <button type="buttom" mat-button class="btn btn_primary" [ngClass]="{'disabled': !isCaptchaResponse || !appData.tandc || isDisabled}" [disabled]="!isCaptchaResponse || !appData.tandc || isDisabled" (click)="onSubmit(appData)">Register</button>
+                    <mat-spinner class="loader" *ngIf="isDisabled"></mat-spinner>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div [innerHTML]="renderMsg" class="resgister-template" *ngIf="isResgister"> </div>
+</section>
+<!-- <app-footer></app-footer> -->

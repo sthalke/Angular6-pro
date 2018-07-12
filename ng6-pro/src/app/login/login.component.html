@@ -1,0 +1,227 @@
+<section id="main-login">
+    <div class="login_wrapper d-flex justify-content-center align-items-center">
+        <header>
+            <div class="login_header_wrapper">
+                <div class="logo text-center">
+                    <a href="https://jadwp.oceanmanager.com"><img src="assets/images/logo.png"></a>
+                </div>
+            </div>
+        </header>
+        <div class="form-signin align-items-center justify-content-center d-fle login-box" *ngIf='!isCheckStatus'>
+            <form (ngSubmit)="onLogin()" #loginFrom="ngForm" *ngIf='isLogin'>
+                <h3 class="login-heading">Log In</h3>
+                <div class="entry-group">
+                    <div class="input-form d-flex align-items-center">
+                        <mat-form-field>
+                            <div class="input-icon">
+                                <span class="ico-cancle">
+                                    <svg> 
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#userIco"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                            <input matInput name="username" placeholder="Username" type="text" [(ngModel)]="loginData.username" required autocomplete="off" appNoSpaces #username="ngModel">
+                            <mat-error *ngIf="username.hasError('required') || username.invalid">
+                                Username Required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-form d-flex align-items-center">
+                        <mat-form-field>
+                            <div class="input-icon">
+                                <span class="ico-cancle">
+                                          <svg> 
+                                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#lockIco"></use>
+                                          </svg>
+                                       </span>
+                            </div>
+                            <input class="passinpt" matInput name="password" placeholder="Password" type="password" id="pwd" [(ngModel)]="loginData.password" required autocomplete="off" appNoSpaces #password="ngModel">
+                            <mat-error *ngIf="password.hasError('required') || password.invalid">
+                                Password Required Or Enter valid Password
+                            </mat-error>
+                            <span class="lost-pass ">
+                            <a (click)="toggleScreen() ">
+                                I lost my Password
+                            </a>
+                          </span>
+                        </mat-form-field>
+                    </div>
+                    <div class="robotcheck_wrap">
+                        <ngx-recaptcha2 #captchaElem (success)="handleCaptchaSuccess($event)" [size]="size" [hl]="lang" [theme]="theme" [type]="type" (expire)="handleCaptchaExpire()"></ngx-recaptcha2>
+                    </div>
+                    <div class="loginbutton text-center">
+                        <!-- <button class="btn_primary" mat-button type="submit" [disabled]="!loginFrom.form.valid || isLoading ">Log In</button> -->
+                        <button class="btn_primary" mat-button [ngClass]="{'disabled': !isCaptchaResponse}" type="submit" [disabled]="!loginFrom.form.valid || isLoading || !isCaptchaResponse">Log In</button>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center ckbox-wrap">
+                        <mat-checkbox name="RememberMe" type="checkbox" [(ngModel)]="rememberMe" (change)="checkRemeber(rememberMe) ">Remember me</mat-checkbox>
+                        <a class="check_status" (click)="onCheckScreen()">Check Status </a>
+                        <mat-spinner class="loader" *ngIf="isLoading"></mat-spinner>
+                    </div>
+                </div>
+            </form>
+            <form *ngIf='!isLogin' #emailFrom="ngForm" (ngSubmit)="onResetCred()">
+                <span class="back-icon" (click)="toggleScreen()">      
+                    <span class="ico-back">
+                        <svg> 
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#backIco"></use>
+                        </svg>
+                    </span>
+                </span>
+                <div class="lost-pass-head">
+                    <h3 class="login-heading lostpass-text">Lost Password?</h3>
+                    <p class="tec_mang">enter your email below to recieve <br> your password reset instructions</p>
+                </div>
+                <div class="entry-group">
+                    <div class="input-form d-flex align-items-center">
+                        <mat-form-field>
+                            <div class="input-icon">
+                                <span class="ico-cancle">
+                                    <svg> 
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#emailIco"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                            <input matInput name="email" placeholder="Email" type="text" id="email" [(ngModel)]="emailData.email" required autocomplete="off" #emailValidate="ngModel" [pattern]="emailPattern" appNoSpaces>
+                            <mat-error *ngIf=" emailValidate.invalid || !emailValidate.hasError('required')">
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error *ngIf="emailValidate.hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="loginbutton d-flex justify-content-around align-items-center">
+                        <button class="btn_primary mg-lft20" mat-button [ngClass]="{'disabled': !emailFrom.form.valid}" type="submit" [disabled]="!emailFrom.form.valid || isLoading">Reset Password</button>
+                    </div>
+                    <!-- <mat-spinner class="loader" *ngIf="isLoading"></mat-spinner> -->
+                </div>
+            </form>
+        </div>
+        <div class="form-signin reset-passwrap align-items-center justify-content-center d-fle" *ngIf="isCheckStatus">
+            <!-- Start: check status -->
+            <div class="check-status-wrap" *ngIf="isStatus=='check'">
+                <span class="back-icon" (click)="backToLogin()">      
+                    <span class="ico-back">
+                        <svg> 
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#backIco"></use>
+                        </svg>
+                    </span>
+                </span>
+                <div class="lost-pass-head">
+                    <h3 class="login-heading lostpass-text">Check Status</h3>
+                    <p class="tec_mang">enter your Reference number to check your<br>registration status</p>
+                </div>
+                <form #statusFrom="ngForm">
+                    <div class="entry-group">
+                        <div class="input-form d-flex align-items-center">
+                            <mat-form-field>
+                                <div class="input-icon">
+                                    <span class="ico-cancle">
+                                    <svg> 
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#uniqueidIco"></use>
+                                    </svg>
+                                </span>
+                                </div>
+                                <input matInput placeholder="Reference number" type="text" autocomplete="off" name="statusId" [(ngModel)]="statusData.ReferenceNo" required appNoSpaces #statusId="ngModel">
+                                <mat-error *ngIf=" statusId.invalid || !statusId.hasError('required')">
+                                    Enter a valid Status Id
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="loginbutton d-flex justify-content-around align-items-center">
+                            <button class="btn_primary mg-lft20" mat-button type="submit" [disabled]="!statusFrom.form.valid || isLoading" (click)="checkStatus(statusData)">Check Status</button>
+                        </div>
+                        <mat-spinner class="loader" *ngIf="isLoading"></mat-spinner>
+                    </div>
+                </form>
+            </div>
+            <!-- End: check status -->
+
+            <!-- Start: form reject sec -->
+            <div class="check-reject-wrap" *ngIf="isStatus=='reject'">
+                <span class="back-icon" (click)="statusNavigation('check')">      
+                <span class="ico-back">
+                    <svg> 
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#backIco"></use>
+                    </svg>
+                </span>
+                </span>
+                <div class="status-wrapper">
+                    <div class="text-center">
+                        <span class="ico-reject">
+                        <svg> 
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#rejectIco"></use>
+                            </svg>
+                    </span>
+                        <p class="tec_mang">sorry your form has been rejected<br>click the link below to check the details</p>
+                        <p class="check-detail"><a (click)="navigate(true)">Check Your Details</a></p>
+                    </div>
+
+                    <div class="loginbutton mt0 d-flex justify-content-around align-items-center">
+                        <button class="btn_black mg-lft20" mat-button type="submit" (click)="statusNavigation('check')">Close</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End: form reject sec -->
+
+            <!-- Start: form success sec -->
+            <div class="check-succes-wrap" *ngIf="isStatus=='success'">
+                <span class="back-icon" (click)="statusNavigation('check')">      
+                <span class="ico-back">
+                    <svg> 
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#backIco"></use>
+                    </svg>
+                 </span>
+                </span>
+                <div class="status-wrapper">
+                    <div class="text-center">
+                        <span class="ico-corectIco">
+                                <svg> 
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#corectIco"></use>
+                                </svg>
+                            </span>
+                        <p class="tec_mang">congratulations your profile has been<br>approved you may login now</p>
+                    </div>
+
+                    <div class="loginbutton d-flex justify-content-around align-items-center">
+                        <button class="btn_primary mg-lft20" mat-button type="submit" (click)="backToLogin()">Go to Log In</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End: form success sec -->
+
+            <!-- Start: form success sec -->
+            <div class="check-pending-wrap" *ngIf="isStatus=='pending'">
+                <span class="back-icon" (click)="statusNavigation('check')">      
+                    <span class="ico-back">
+                        <svg> 
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#backIco"></use>
+                        </svg>
+                    </span>
+                </span>
+                <div class="status-wrapper">
+                    <div class="text-center">
+                        <span class="ico-pendingIco">
+                                <svg> 
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/sprite.svg#questionIco"></use>
+                                </svg>
+                            </span>
+                        <p class="tec_mang">your registered information is<br> under review</p>
+                    </div>
+
+                    <div class="loginbutton d-flex justify-content-around align-items-center">
+                        <button class="btn_black mg-lft20" mat-button type="submit" (click)="statusNavigation('check')">Close</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End: form success sec -->
+        </div>
+
+        <div class="new-acc text-center" *ngIf='!isCheckStatus'>
+            <a (click)="navigate(false)">Create New Account <b>Register</b></a>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,180 @@
+/*Start:registration Page*/
+
+.acc_log_text span {
+    color: #afb6b8;
+    font-size: 13px;
+}
+
+.acc_log_text a {
+    color: #02b0ed !important;
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 5px;
+}
+
+.add-more {
+    color: #02b0ed !important;
+    font-size: 14px;
+}
+
+.add-more:hover {
+    text-decoration: underline !important;
+}
+
+.register_head_no {
+    border: 2px solid #3c474b;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-right: 5px;
+}
+
+.applicant-form .form-control {
+    border-bottom: 1px solid #99a3a6;
+    border-left: unset;
+    border-right: unset;
+    border-top: unset;
+    border-radius: 0px;
+}
+
+.form_wrap_content {
+    padding: 30px 0px;
+}
+
+#registration_wrapper {
+    margin: 0px auto 30px;
+    width: 50%;
+}
+
+.form-control.greyclr_opt {
+    color: #6c757c;
+    font-size: 14px;
+}
+
+.registration_tabs_text p {
+    color: #02b0ed;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #99a3a6;
+    line-height: 0.1em;
+    margin: 10px 0 35px;
+}
+
+.robotcheck_wrap {
+    /* border: 1px solid #ccc; */
+    width: 305px;
+    margin: 10px auto 30px;
+    height: 80px;
+    /* border-radius: 2px; */
+}
+
+.register_btn {
+    margin: 20px 0px;
+}
+
+.registration_tabs_text p span {
+    background: #fff;
+    padding: 0 10px;
+}
+
+.registration_tabs_text ul li.inactive {
+    color: #afb6b8;
+}
+
+.registration_tabs_text ul li.inactive .register_head_no {
+    border-color: #afb6b8;
+}
+
+.add-remove {
+    margin-top: -15px;
+}
+
+.regfoot_box {
+    border-top: 1px solid #99a3a6;
+    padding: 30px 0px;
+}
+
+.vessel_details_wrap .registration_tabs_text p {
+    margin: 10px 0 15px;
+}
+
+.vessel_sub_heading p {
+    font-size: 13px;
+    margin-bottom: 20px;
+    font-style: oblique;
+}
+
+.reg_form_head {
+    font-size: 28px;
+    color: #3c474b;
+}
+
+
+/*End:registration Page*/
+
+
+/*Start: registration page inactive */
+
+.inactive_col .applicant-form .form-control {
+    border-bottom: 1px solid #afb6b8;
+}
+
+.inactive_col .register_head_no {
+    border: 2px solid #afb6b8;
+}
+
+.inactive_col::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #83daf8;
+    opacity: 1;
+    /* Firefox */
+    font-size: 14px;
+}
+
+.inactive_col:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #83daf8;
+    font-size: 14px;
+}
+
+.inactive_col::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #83daf8;
+    font-size: 14px;
+}
+
+#registration_wrapper .ckbox-wrap {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.ckbox-wrap a {
+    color: #02b0ed !important;
+    font-size: 14px;
+    margin-top: 2px;
+    margin-left: 4px;
+    display: inline-block;
+}
+
+.ckbox-wrap a:hover {
+    text-decoration: underline !important;
+}
+
+.ckbox-wrap label {
+    margin-bottom: 0 !important;
+}
+
+.resgister-template {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    margin: 30px auto;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1), 0 3px 9px 0 rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+    padding: 30px
+}
+
+
+/*End: registration page inactive */

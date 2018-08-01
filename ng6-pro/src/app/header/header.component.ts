@@ -75,19 +75,5 @@ export class HeaderComponent implements OnInit {
       }               
   }
   
-  deleteCookie(name, value, expires) {
-    let cookie = name + '=' + value + ';';  
-    if (expires) {
-      if (expires instanceof Date) {
-        // If it isn't a valid date
-        if (isNaN(expires.getTime())) {
-          expires = new Date();
-        }
-      } else {
-        expires = new Date(new Date().getTime());
-      }
-      cookie += 'expires=' + expires.toGMTString() + ';';
-    }
-    document.cookie = cookie;
-  }
+  
 }

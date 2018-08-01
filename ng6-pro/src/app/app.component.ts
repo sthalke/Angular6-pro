@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Services
@@ -9,7 +9,7 @@ import { LocalStorageService } from 'ngx-store';
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy, OnInit {
   public isLogin: boolean;
   constructor(
     private cookiesService: CookieService,
@@ -34,6 +34,15 @@ export class AppComponent {
           this.isLogin = false;
         }
       });      
+    }
+
+    ngOnInit() {
+      console.log('asdas');
+    }
+
+    ngOnDestroy() {
+      // this.localStorageService.clear('decorators');
+      // this.localStorageService.clear('prefix');
     }
 
     
